@@ -18,15 +18,9 @@ public class AddResolution extends BottomSheetDialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAddResolutionBinding.inflate(inflater, container, false);
-
 
         return binding.getRoot();
     }
