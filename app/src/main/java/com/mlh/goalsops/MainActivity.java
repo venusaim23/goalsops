@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.mlh.goalsops.databinding.ActivityMainBinding;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +19,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    private static final String ACC_SID = "ACf775c425a3a4a39298540477f0be080f";
+    private static final String AUTH_TOKEN = "4af54a1485fca9efb380d35944d6da33";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 //Todo open bottom sheet
             }
         });
+
+        Twilio.init(ACC_SID, AUTH_TOKEN);
+        Message msg = Message.creator(new PhoneNumber("whatsapp:+918727064663"),
+                new PhoneNumber("whatsapp:+14155238886"), "Yooo you made it").create();
     }
 
     @Override
