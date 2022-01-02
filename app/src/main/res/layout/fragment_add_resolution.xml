@@ -84,7 +84,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/date_select_img"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"

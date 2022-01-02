@@ -1,5 +1,7 @@
 package com.mlh.goalsops;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +9,11 @@ import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mlh.goalsops.Adapters.ResolutionsAdapter;
+import com.mlh.goalsops.Models.Resolution;
+import com.mlh.goalsops.Utilities.Utility;
 import com.mlh.goalsops.databinding.ActivityMainBinding;
 //import com.twilio.Twilio;
 //import com.twilio.rest.api.v2010.account.Message;
@@ -15,13 +22,19 @@ import com.mlh.goalsops.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements ResolutionsFragment.ResolutionListener {
 
     private ActivityMainBinding binding;
 
     private ResolutionsFragment resolutionsFragment;
     private AddResolution bottomSheet;
     private FragmentManager manager;
+
+    private List<Resolution> resolutions;
 
     private static final String ACC_SID = "ACf775c425a3a4a39298540477f0be080f";
     private static final String AUTH_TOKEN = "4af54a1485fca9efb380d35944d6da33";
@@ -33,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        resolutionsFragment = new ResolutionsFragment();
-        bottomSheet = new AddResolution();
+        getResolutions();
+
+        resolutionsFragment = new ResolutionsFragment(resolutions);
+        bottomSheet = new AddResolution(resolutions);
         manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.frame_layout_main, resolutionsFragment).commit();
 
@@ -48,6 +63,17 @@ public class MainActivity extends AppCompatActivity {
 //        Twilio.init(ACC_SID, AUTH_TOKEN);
 //        Message msg = Message.creator(new PhoneNumber("whatsapp:+918727064663"),
 //                new PhoneNumber("whatsapp:+14155238886"), "Yooo you made it").create();
+    }
+
+    private void getResolutions() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Utility.PREF_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Utility.KEY, null);
+        Type type = new TypeToken<ArrayList<Resolution>>() {}.getType();
+        resolutions = gson.fromJson(json, type);
+
+        if (resolutions == null)
+            resolutions = new ArrayList<>();
     }
 
     private void addResolution() {
@@ -74,5 +100,12 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void refreshResolutions(ResolutionsAdapter adapter) {
+        resolutions = null;
+        adapter.notifyDataSetChanged();
+        getResolutions();
     }
 }
