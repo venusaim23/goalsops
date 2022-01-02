@@ -46,7 +46,7 @@ public class ResolutionsAdapter extends RecyclerView.Adapter<ResolutionsAdapter.
         long timeStamp = resolution.getTimeStamp();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = formatter.format(new Date(timeStamp));
-        holder.deadlineTV.setText(dateString);
+        holder.dateCreatedTV.setText(dateString);
     }
 
     @Override

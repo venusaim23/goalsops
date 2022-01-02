@@ -32,7 +32,7 @@ public class ResolutionsFragment extends Fragment implements SwipeRefreshLayout.
     private ResolutionListener listener;
 
     public interface ResolutionListener {
-        void refreshResolutions(ResolutionsAdapter adapter);
+        void refreshResolutions();
     }
 
     public ResolutionsFragment(List<Resolution> resolutions) {
@@ -91,7 +91,7 @@ public class ResolutionsFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void run() {
                 if (resolutions.isEmpty()) {
-                    binding.swipeRefreshLayoutRes.setRefreshing(true);
+                    binding.swipeRefreshLayoutRes.setRefreshing(false);
                     binding.emptyTvRes.setVisibility(View.VISIBLE);
                 }
             }
@@ -99,7 +99,9 @@ public class ResolutionsFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     private void getResolutions() {
-        listener.refreshResolutions(adapter);
+        listener.refreshResolutions();
+        if (!resolutions.isEmpty())
+            binding.swipeRefreshLayoutRes.setRefreshing(false);
     }
 
     @Override

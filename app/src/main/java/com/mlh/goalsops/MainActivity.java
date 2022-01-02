@@ -103,9 +103,7 @@ public class MainActivity extends AppCompatActivity implements ResolutionsFragme
     }
 
     @Override
-    public void refreshResolutions(ResolutionsAdapter adapter) {
-        resolutions = null;
-        adapter.notifyDataSetChanged();
+    public void refreshResolutions() {
         getResolutions();
     }
 }
