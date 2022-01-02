@@ -67,7 +67,7 @@
                 android:layout_below="@id/description_tv_res"
                 android:layout_alignStart="@+id/title_tv_res"
                 android:layout_marginTop="10dp"
-                android:text="@string/deadline"
+                android:text="@string/deadline_"
                 android:textSize="12sp" />
 
             <androidx.cardview.widget.CardView

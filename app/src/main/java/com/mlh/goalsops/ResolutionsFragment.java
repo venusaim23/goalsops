@@ -3,23 +3,23 @@ package com.mlh.goalsops;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.mlh.goalsops.databinding.FragmentResolutionsBinding;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.mlh.goalsops.databinding.FragmentAddResolutionBinding;
+public class ResolutionsFragment extends Fragment {
 
-public class AddResolution extends BottomSheetDialogFragment {
-
-    private FragmentAddResolutionBinding binding;
+    FragmentResolutionsBinding binding;
 
     private Context context;
 
-    public AddResolution() {
+    public ResolutionsFragment() {
         // Required empty public constructor
     }
 
@@ -32,7 +32,7 @@ public class AddResolution extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentAddResolutionBinding.inflate(inflater, container, false);
+        binding = FragmentResolutionsBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
