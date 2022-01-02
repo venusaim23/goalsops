@@ -14,6 +14,6 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="set_deadline_date">Set deadline date</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel">Cancel</string>
     <string name="add">Add</string>
 </resources>
